@@ -1,0 +1,5 @@
+allowBuilds:
+  '@mercuryworkshop/scramjet': true
+  '@swc/core': true
+  bufferutil: true
+  esbuild: true
