@@ -1,0 +1,7 @@
+[deploy]
+healthcheckPath = "/"
+healthcheckTimeout = 300
+restartPolicyType = "always"
+
+[experimental]
+enableServiceMesh = false
