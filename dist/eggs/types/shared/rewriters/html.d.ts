@@ -1,6 +1,6 @@
-import { DomHandler } from "domhandler";
 import { URLMeta } from "./url";
-import { ScramjetContext } from "../../shared";
-export declare function rewriteHtml(html: string, context: ScramjetContext, meta: URLMeta, fromTop?: boolean, preRewrite?: (handler: DomHandler) => void, postRewrite?: (handler: DomHandler) => void): string;
+import { CookieStore } from "../cookie";
+export declare function getInjectScripts<T>(cookieStore: CookieStore, script: (src: string) => T): T[];
+export declare function rewriteHtml(html: string, cookieStore: CookieStore, meta: URLMeta, fromTop?: boolean): string;
 export declare function unrewriteHtml(html: string): string;
-export declare function rewriteSrcset(srcset: string, context: ScramjetContext, meta: URLMeta): string;
+export declare function rewriteSrcset(srcset: string, meta: URLMeta): string;

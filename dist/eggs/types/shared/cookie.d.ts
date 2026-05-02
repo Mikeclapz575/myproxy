@@ -9,7 +9,7 @@ export type Cookie = {
     httpOnly?: boolean;
     sameSite?: "strict" | "lax" | "none";
 };
-export declare class CookieJar {
+export declare class CookieStore {
     private cookies;
     setCookies(cookies: string[], url: URL): void;
     getCookies(url: URL, fromJs: boolean): string;

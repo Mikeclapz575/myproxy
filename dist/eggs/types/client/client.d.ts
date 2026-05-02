@@ -1,17 +1,8 @@
-type ScramjetFrame = any;
-import { BareCompatibleClient, ProxyTransport } from "@mercuryworkshop/proxy-transports";
+import { ScramjetFrame } from "../controller/frame";
 import { type URLMeta } from "../shared/rewriters/url";
-import { ScramjetContext } from "../shared";
+import { CookieStore } from "../shared/cookie";
 import { SingletonBox } from "./singletonbox";
-import { ScramjetConfig } from "../types";
-export type ScramjetClientInit = {
-    context: ScramjetContext;
-    transport: ProxyTransport;
-    sendSetCookie: (url: URL, cookie: string) => Promise<void>;
-    shouldPassthroughWebsocket?: (url: string | URL) => boolean;
-    shouldBlockMessageEvent?: (ev: MessageEvent) => boolean;
-    hookSubcontext: (self: Self, frame?: HTMLIFrameElement) => ScramjetClient;
-};
+import BareClient from "@mercuryworkshop/bare-mux";
 type NativeStore = {
     store: Record<string, any>;
     call: (target: string, that: any, ...args: any[]) => any;
@@ -56,13 +47,13 @@ export type Trap<T> = {
 };
 export declare class ScramjetClient {
     global: typeof globalThis;
-    init: ScramjetClientInit;
     locationProxy: any;
     serviceWorker: ServiceWorkerContainer;
-    bare: BareCompatibleClient;
+    bare: BareClient;
     natives: NativeStore;
     descriptors: DescriptorStore;
     wrapfn: (i: any, ...args: any) => any;
+    cookieStore: CookieStore;
     eventcallbacks: Map<any, [
         {
             event: string;
@@ -72,20 +63,16 @@ export declare class ScramjetClient {
     ]>;
     meta: URLMeta;
     box: SingletonBox;
-    context: ScramjetContext;
-    constructor(global: typeof globalThis, init: ScramjetClientInit);
+    constructor(global: typeof globalThis);
     get frame(): ScramjetFrame | null;
     get isSubframe(): boolean;
+    loadcookies(cookiestr: string): void;
     hook(): void;
     get url(): URL;
     set url(url: URL | string);
     Proxy(name: string | string[], handler: Proxy): void;
-    RawProxy(target: any, prop: string, handler: Proxy, debugname?: string): void;
+    RawProxy(target: any, prop: string, handler: Proxy): void;
     Trap<T>(name: string | string[], descriptor: Trap<T>): PropertyDescriptor;
     RawTrap<T>(target: any, prop: string, descriptor: Trap<T>): PropertyDescriptor;
-    rewriteUrl(url: string | URL): string;
-    unrewriteUrl(url: string | URL): string;
-    flagEnabled(flag: keyof ScramjetConfig["flags"]): boolean;
-    get config(): ScramjetConfig;
 }
 export {};
