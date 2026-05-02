@@ -1,8 +1,9 @@
 import "./global.d";
+import { ScramjetConfig } from "./types";
 export * from "./client";
-export * from "./controller";
 export * from "./shared";
-export * from "./worker";
-export * from "./entry";
 export * from "./symbols";
 export * from "./types";
+export * from "./fetch";
+export declare const defaultConfig: ScramjetConfig;
+export declare const defaultConfigDev: ScramjetConfig;
