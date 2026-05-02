@@ -29,7 +29,7 @@ Object.assign(wisp.options, {
 server.on("upgrade", (req, sock, head) =>
   bare?.shouldRoute(req)
     ? bare.routeUpgrade(req, sock, head)
-    : req.url.endsWith("/wisp/")
+    : req.url.startsWith("/wisp")
       ? wisp.routeRequest(req, sock, head)
       : sock.end()
 );
