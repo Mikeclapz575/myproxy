@@ -15,7 +15,7 @@ export default function useReg() {
     const init = async () => {
       if (!window.scr) {
         const script = document.createElement('script');
-        script.src = '/eggs/scramjet.all.js';
+        script.src = '/eggs/scramjet.js';
         await new Promise((resolve, reject) => {
           script.onload = resolve;
           script.onerror = reject;
@@ -32,7 +32,7 @@ export default function useReg() {
         prefix: hamPrefix,
         files: {
           wasm: eggsPath + 'scramjet.wasm.wasm',
-          all: eggsPath + 'scramjet.all.js',
+          all: eggsPath + 'scramjet.js',
           sync: eggsPath + 'scramjet.sync.js',
         },
         flags: { rewriterLogs: false, scramitize: false, cleanErrors: true, sourcemaps: true },
